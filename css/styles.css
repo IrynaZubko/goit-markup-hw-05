@@ -23,11 +23,17 @@
     --bg-icon-color: #F5F4FA;
     --bg-icon-color-second: var(--icon-primary-color);
     --bg-icon-footer-color: rgba(255, 255, 255, 0.1);
+    --bg-backdrop-color: rgba(0, 0, 0, 0.1);
+    --bg-card-color: rgba(47, 48, 58, 0.8);
+    --bg-portfolio-card-color: rgba(33, 150, 243, 0.9);
     
     /* letter-spacing */
     --letter-spacing-main: 0.03em;
     --letter-spacing-accent: 0.02em;
     --letter-spacing-second: 0.06em;
+
+    --cubic-bezier: cubic-bezier(0.4, 0, 0.2, 1);
+    --duration: 250ms;
 }
 
 body {
@@ -78,11 +84,33 @@ p {
     color: var(--button-color);
 }
 
+.current > .link {
+    position: relative;
+}
+
+.current > .link::after {
+    content: "";
+
+    position: absolute;
+    left: 0;
+    bottom: 0;
+
+    display: block;
+    width: 100%;
+    height: 4px;
+    background-color: var(--button-color);
+    border-radius: 2px;
+}
+
 .link,
 .card-link {
     text-decoration: none;
 
     color: inherit;
+}
+
+.link {
+    transition: color var(--duration) var(--cubic-bezier);
 }
 
 .link:hover,
@@ -114,6 +142,7 @@ p {
 }
 
 /* navigation and contacts*/
+
 .header > .container,
 .navigation {
     display: flex;
@@ -137,7 +166,7 @@ p {
 
 .logo-link:hover,
 .logo-link:focus {
-    color: var(--button-color)
+    color: var(--button-color);
 }
 
 .logo {
@@ -252,6 +281,7 @@ p {
     background-color: var(--button-color);
 
     cursor: pointer;
+    transition: background-color var(--duration) var(--cubic-bezier);
 }
 
 .button:hover,
@@ -319,6 +349,28 @@ p {
     margin-left: 30px;
 }
 
+.doings-item {
+    position: relative;
+}
+
+.doings-item-description {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    display: inline-block;
+    padding-top: 27px;
+    padding-bottom: 27px;
+    width: 100%;
+
+    font-weight: 700;
+    line-height: 1.14;
+    text-align: center;
+    text-transform: uppercase;
+    color: var(--primary-white-color);
+
+    background-color: var(--bg-card-color);
+}
+
 /* Our team */
 
 .our-team-section {
@@ -375,7 +427,12 @@ p {
     width: 100%;
     height: 100%;
 
+    border: none;
+    border-radius: 50%;
     color: var(--bg-icon-color-second);
+
+    transition: color var(--duration) var(--cubic-bezier),
+    background-color var(--duration) var(--cubic-bezier);
 }
 
 .social-link-icon {
@@ -384,10 +441,8 @@ p {
 
 .social-link:hover,
 .social-link:focus {
-    border: none;
     color: var(--primary-white-color);
     background-color: var(--button-color);
-    border-radius: 50%;
 }
 
 /* Regular costumers */
@@ -417,7 +472,9 @@ p {
     border-color: var(--border-costumers-color);
     border-radius: 4px;
    
-   color: var(--icon-primary-color);
+    color: var(--icon-primary-color);
+    transition: color var(--duration) var(--cubic-bezier),
+    border-color var(--duration) var(--cubic-bezier);
 }
 
 .costumers-link:hover,
@@ -514,6 +571,73 @@ p {
     background-color: var(--button-color);
 }
 
+.backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background-color: var(--bg-backdrop-color);
+
+    opacity: 1;
+    visibility: visible;
+    transition: opacity var(--duration) var(--cubic-bezier),
+    visibility var(--duration) var(--cubic-bezier);
+}
+
+.backdrop.is-hidden {
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.backdrop.is-hidden .modal {
+    transform: translate(-50%, -50%) scale(0.5);
+}
+
+.modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    min-width: 528px;
+    min-height: 581px;
+
+    background-color: var(--primary-white-color);
+
+    transform: translate(-50%, -50%) scale(1);
+    transition: transform var(--duration) var(--cubic-bezier);
+}
+
+.modal-close-button {
+    position: absolute;
+    right: 8px;
+    top: 8px;
+    
+    width: 30px;
+    height: 30px;
+
+    border: 1px solid var(--bg-backdrop-color);
+    border-radius: 50%;
+    background-color: inherit;
+    cursor: pointer;
+}
+
+.close-button-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    fill: inherit;
+}
+
+.modal-close-button:hover,
+.modal-close-button:focus {
+    fill: var(--button-color)
+}
+
 /* Portfolio */
 
 /* Content */
@@ -544,6 +668,9 @@ p {
     background: var(--bg-accent-color);
 
     cursor: pointer;
+    transition: color var(--duration) var(--cubic-bezier),
+    background-color var(--duration) var(--cubic-bezier),
+    box-shadow var(--duration) var(--cubic-bezier);
 }
 
 .portfolio-button:hover,
@@ -568,11 +695,44 @@ p {
     margin-top: 30px;
 }
 
+.card-link {
+    transition: box-shadow var(--duration) var(--cubic-bezier);
+}
+
 .card-link:hover,
 .card-link:focus {
     display: block;
     
     box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.12), 0px 4px 4px rgba(0, 0, 0, 0.06), 1px 4px 6px rgba(0, 0, 0, 0.16);
+}
+
+.image-thumb {
+    position: relative;
+    overflow: hidden;
+}
+
+.portfolio-card-description {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-right: 24px;
+    padding-left: 24px;
+
+    line-height: 1.56;
+    color: var(--primary-white-color);
+    background-color: var(--bg-portfolio-card-color);
+
+    transform: translateY(100%);
+    transition: transform var(--duration) var(--cubic-bezier);
+}
+
+.card-link:hover .portfolio-card-description {
+    transform: translateY(0);
 }
 
 .portfolio-card-content {
