@@ -357,14 +357,16 @@ p {
     position: absolute;
     left: 0;
     bottom: 0;
-    display: inline-block;
-    padding-top: 27px;
-    padding-bottom: 27px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 70px;
     width: 100%;
 
     font-weight: 700;
+    font-size: 14px;
     line-height: 1.14;
-    text-align: center;
     text-transform: uppercase;
     color: var(--primary-white-color);
 
